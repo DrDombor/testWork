@@ -4,13 +4,13 @@ public class Triangle
 	
 	public static double Square(double sideA, double sideB, double sideC)
 	{
-		//проверка, что введены положительные размеры сторон
+		//РїСЂРѕРІРµСЂРєР°, С‡С‚Рѕ РІРІРµРґРµРЅС‹ РїРѕР»РѕР¶РёС‚РµР»СЊРЅС‹Рµ СЂР°Р·РјРµСЂС‹ СЃС‚РѕСЂРѕРЅ
 		if((a < 0) || (b < 0) ||(c < 0)
 		{
-			throw new ArgumentException("Стороны не могут быть меньше нуля");
+			throw new ArgumentException("Г‘ГІГ®Г°Г®Г­Г» Г­ГҐ Г¬Г®ГЈГіГІ ГЎГ»ГІГј Г¬ГҐГ­ГјГёГҐ Г­ГіГ«Гї");
 		}
 		double legA, legB, hypotenuse;
-		//тут я понял, что в условии задачи не сказано, что будут четко вписывать в порядке катет/катет/гипотенуза
+		//С‚СѓС‚ СЏ РїРѕРЅСЏР», С‡С‚Рѕ РІ СѓСЃР»РѕРІРёРё Р·Р°РґР°С‡Рё РЅРµ СЃРєР°Р·Р°РЅРѕ, С‡С‚Рѕ Р±СѓРґСѓС‚ С‡РµС‚РєРѕ РІРїРёСЃС‹РІР°С‚СЊ РІ РїРѕСЂСЏРґРєРµ РєР°С‚РµС‚/РєР°С‚РµС‚/РіРёРїРѕС‚РµРЅСѓР·Р°
 		
 		if(sideC > sideA && sideC > sideB)
 		{
@@ -31,16 +31,16 @@ public class Triangle
 			legB = sideC;
 		}
 		
-		//начало проверки является ли треугольник прямоугольным
+		//РЅР°С‡Р°Р»Рѕ РїСЂРѕРІРµСЂРєРё СЏРІР»СЏРµС‚СЃСЏ Р»Рё С‚СЂРµСѓРіРѕР»СЊРЅРёРє РїСЂСЏРјРѕСѓРіРѕР»СЊРЅС‹Рј
 		double squareHypotenuse = Math.Pow(hypotenuse,2);
 		double squareLegA = Math.Pow(legA,2);
 		double squareLegB = Math.Pow(legB,2);
 
 		if(squareHypotenuse != (squareLegA + squareLegB))
 		{
-			throw new ArgumentException("Треугольник не является прямоугольным");
+			throw new ArgumentException("Г’Г°ГҐГіГЈГ®Г«ГјГ­ГЁГЄ Г­ГҐ ГїГўГ«ГїГҐГІГ±Гї ГЇГ°ГїГ¬Г®ГіГЈГ®Г«ГјГ­Г»Г¬");
 		}
-		//тут включается проверка на слишком большие значения
+		//С‚СѓС‚ РІРєР»СЋС‡Р°РµС‚СЃСЏ РїСЂРѕРІРµСЂРєР° РЅР° СЃР»РёС€РєРѕРј Р±РѕР»СЊС€РёРµ Р·РЅР°С‡РµРЅРёСЏ
 		double square = checked(0.5 * legA * legB);
 		
 		return square;
@@ -54,11 +54,11 @@ public void RightSquare()
 	double square = Rectangle.Square(3.0,4.0,5.0);
 	Assert.AreEqual(6.0,square);
 	var squareExceorion = Assert.Throws<System.ArgumentException>(() => Rectangle.Square(3.0,3.0,3.0));
-	Assert.That(squareExceorion.Message, Is.EqualTo("Треугольник не является прямоугольным"));
+	Assert.That(squareExceorion.Message, Is.EqualTo("Г’Г°ГҐГіГЈГ®Г«ГјГ­ГЁГЄ Г­ГҐ ГїГўГ«ГїГҐГІГ±Гї ГЇГ°ГїГ¬Г®ГіГЈГ®Г«ГјГ­Г»Г¬"));
 	var newSquareEx = Assert.Throws<System.ArgumentException>(() => Rectangle.Square(-3.0,3.0,3.0));
-	Assert.That(newSquareEx.Message, Is.EqualTo("Стороны не могут быть меньше нуля"));
+	Assert.That(newSquareEx.Message, Is.EqualTo("Г‘ГІГ®Г°Г®Г­Г» Г­ГҐ Г¬Г®ГЈГіГІ ГЎГ»ГІГј Г¬ГҐГ­ГјГёГҐ Г­ГіГ«Гї"));
 	Assert.Throws<System.ArgumentException>(() => Rectangle.Square(-3.0,-3.0,3.0));
 	Assert.Throws<System.ArgumentException>(() => Rectangle.Square(3.0,3.0,-3.0));
 	Assert.Throws<System.ArgumentException>(() => Rectangle.Square(-3.0,3.0,3.0));
-	// на переполнение честно не подобрал значения - торопился
+	// РЅР° РїРµСЂРµРїРѕР»РЅРµРЅРёРµ С‡РµСЃС‚РЅРѕ РЅРµ РїРѕРґРѕР±СЂР°Р» Р·РЅР°С‡РµРЅРёСЏ - С‚РѕСЂРѕРїРёР»СЃСЏ
 }

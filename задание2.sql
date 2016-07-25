@@ -1,5 +1,5 @@
---Исхожу из условия что у нас есть товары именно "молоко" и "сметана". Таблица с клиентами - Clients, таблица с покупками Purchases.
+--РСЃС…РѕР¶Сѓ РёР· СѓСЃР»РѕРІРёСЏ С‡С‚Рѕ Сѓ РЅР°СЃ РµСЃС‚СЊ С‚РѕРІР°СЂС‹ РёРјРµРЅРЅРѕ "РјРѕР»РѕРєРѕ" Рё "СЃРјРµС‚Р°РЅР°". РўР°Р±Р»РёС†Р° СЃ РєР»РёРµРЅС‚Р°РјРё - Clients, С‚Р°Р±Р»РёС†Р° СЃ РїРѕРєСѓРїРєР°РјРё Purchases.
  
  select CustomerId, RegistrationDateTime from Clients 
- where CustomerId not in (select CustomerId from Purchases where ProductName = 'сметана') 
- and CustomerId in (select CustomerId from Purchases where ProductName = 'молоко') 
+ where CustomerId not in (select CustomerId from Purchases where ProductName = 'Г±Г¬ГҐГІГ Г­Г ') 
+ and CustomerId in (select CustomerId from Purchases where ProductName = 'Г¬Г®Г«Г®ГЄГ®') 

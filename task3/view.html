@@ -1,0 +1,65 @@
+<div ng-controller="taskInfoController"
+     ng-class="{'task-main-frame':!infoMLForTask.AddressBExist, 'task-main-frame-B':infoMLForTask.AddressBExist}">
+    <b>№ МЛ:&nbsp;</b>{{ML.NumML}}</span>&nbsp;&nbsp;&nbsp;
+
+    <table style="width: 100%; margin-top: 5px;" class="nav-grid">
+        <tr>
+            <th>Адрес А</th>
+            <th ng-show="ML.AddressBExist">Адрес Б</th>
+        </tr>
+        <tr>
+            <td width="40%">{{ML.AdresA}}</td>
+            <td width="40%" ng-show="ML.AddressBExist">{{ML.AdresB}}</td>
+        </tr>
+    </table>
+    <br>
+    <table class = 'nav-grid' style="width:100%; text-align: center" >
+        <tr>
+            <th style="width:150px;">Департамент</th>
+
+            <th colspan="{{setColSpan()}}" style="width:60px;">Окончание</th>
+            <th style="width:60%;">Комментарий</th>
+            <th style="width:200px;">Статус</th>
+        </tr>
+        <tr ng-repeat-start="department in taskInfo.availableDepartments">
+            <th rowspan="{{setRowSpan(department)}}">
+                {{department.Name}}
+            </th>
+            <th style="height:30px;">{{department.Task[0].End}}</th>
+            <td>
+                <button type="button" class="btn btn-default" ng-if="CanSend(department.Task[0].StateId)" ng-click="sendTask(department.Task[0],department.Id)">Выдать</button>
+                <button type="button" class="btn btn-default" ng-if="CanCancel(department.Task[0].StateId)" ng-click="cancelTask(department.Task[0].Id)">Отменить</button>
+                <button type="button" class="btn btn-default" ng-if="CanAccept(department.Task[0].StateId)" ng-click="acceptTask(department.Task[0].Id)">Принять</button>
+                <button type="button" class="btn btn-default" ng-if="CanClose(department.Task[0].StateId)" ng-click="closeTask(department.Task[0].Id)">Сдать</button>
+            </td>
+            <td ng-if="TaskForDepartment()">
+                <button type="button" class="btn btn-default" ng-if="CanReturn(department.Task[0].StateId)" ng-click="returnTask(department.Task[0].Id)">Вернуть</button>
+            </td>
+            <td>
+                {{department.Task[0].Description}}
+            </td>
+            <td>
+                {{department.Task[0].StatusName}}
+            </td>
+        </tr>
+        <tr ng-repeat-end ng-show="department.ExistB && department.Task.length > 1">
+            <th style="height:30px;">{{department.Task[1].End}}</th>
+            <td>
+                <button type="button" class="btn btn-default" ng-if="CanSend(department.Task[1].StateId)" ng-click="sendTask(department.Task[1],department.Id)">Выдать</button>
+                <button type="button" class="btn btn-default" ng-if="CanCancel(department.Task[1].StateId)" ng-click="cancelTask(department.Task[1].Id)">Отменить</button>
+                <button type="button" class="btn btn-default" ng-if="CanAccept(department.Task[1].StateId)" ng-click="acceptTask(department.Task[1].Id)">Принять</button>
+                <button type="button" class="btn btn-default" ng-if="CanClose(department.Task[1].StateId)" ng-click="closeTask(department.Task[1].Id)">Сдать</button>
+            </td>
+            <td ng-if="CanReturn(department.Task[0].StateId)">
+                <button type="button" class="btn btn-default" ng-click="returnTask(department.Task[0].Id)">Вернуть</button>
+            </td>
+            <td>
+                {{department.Task[1].Description}}
+            </td>
+            <td>
+                {{department.Task[1].StatusName}}
+            </td>
+        </tr>
+    </table>
+    <div class="clearfix"></div>
+</div>
